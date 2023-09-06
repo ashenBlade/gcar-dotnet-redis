@@ -1,6 +1,6 @@
 ﻿using StackExchange.Redis;
 
-namespace GcarRateLimit.RateLimiter;
+namespace GcraRateLimit.RateLimiter;
 
 public class RedisGcarRateLimiter: IRateLimiter
 {
@@ -14,6 +14,6 @@ public class RedisGcarRateLimiter: IRateLimiter
     public async Task<bool> TryGetAccess(string key, CancellationToken token = default)
     {
         var database = _multiplexer.GetDatabase();
-        throw new NotImplementedException();
+        
     }
 }

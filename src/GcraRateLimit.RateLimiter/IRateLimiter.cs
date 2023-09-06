@@ -1,4 +1,4 @@
-namespace GcarRateLimit.RateLimiter;
+namespace GcraRateLimit.RateLimiter;
 
 public interface IRateLimiter
 {

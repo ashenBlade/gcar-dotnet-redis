@@ -1,7 +1,7 @@
-using GcarRateLimit.RateLimiter;
+using GcraRateLimit.RateLimiter;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GcarRateLimit.Web.Controllers;
+namespace GcraRateLimit.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -19,11 +19,14 @@ public class RateLimiterController : ControllerBase
     [HttpGet("")]
     public async Task<IActionResult> GetAccessAsync(string key)
     {
+        _logger.LogInformation("Получен запрос на получение доступа по ключу {Key}", key);
         if (await _rateLimiter.TryGetAccess(key))
         {
+            _logger.LogInformation("Для ключа {Key} доступ получен", key);
             return Ok();
         }
 
+        _logger.LogInformation("Для ключа {Key} доступ не получен", key);
         return BadRequest();
     }
 }

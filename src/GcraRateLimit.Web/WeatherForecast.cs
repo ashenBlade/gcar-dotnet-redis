@@ -1,4 +1,4 @@
-namespace GcarRateLimit.Web;
+namespace GcraRateLimit.Web;
 
 public class WeatherForecast
 {
