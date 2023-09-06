@@ -1,0 +1,7 @@
+﻿services:
+  web:
+    image: gcar-rate-limit.web
+    build:
+      context: .
+      dockerfile: src/GcarRateLimit.Web/Dockerfile
+    
