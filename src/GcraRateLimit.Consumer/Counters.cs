@@ -1,6 +1,6 @@
 using System.Diagnostics.Metrics;
 
-namespace GcraRateLimit.Consumer;
+namespace GcraRateLimit.Producer;
 
 public static class Counters
 {

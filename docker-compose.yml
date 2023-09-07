@@ -5,10 +5,13 @@
       context: .
       dockerfile: src/GcraRateLimit.Producer/Dockerfile
     environment:
-      SLEEP_TIME: "00:00:00.001"
-      REQUEST_URL: 'http://consumer/rate-limit?key=shared'
+      SLEEP_TIME: "00:00:05"
+      REQUEST_URL: 'http://consumer/rate-limit'
+      REDIS__HOST: 'redis:6379'
+      RATE_LIMIT__Interval: '00:01:00' # 1 минута
+      RATE_LIMIT__MaxRequests: '12000' # 10 тыс. запросов в минуту
     deploy:
-      replicas: 5
+      replicas: 7
       
   consumer:
     image: gcra-rate-limit.consumer
@@ -17,10 +20,6 @@
       dockerfile: src/GcraRateLimit.Consumer/Dockerfile
     deploy:
       replicas: 3
-    environment:
-      REDIS__HOST: 'redis:6379'
-      RATE_LIMIT__Interval: '00:01:00' # 1 минута
-      RATE_LIMIT__MaxRequests: '10000' # 10 тыс. запросов в минуту
       
   redis:
     image: bitnami/redis

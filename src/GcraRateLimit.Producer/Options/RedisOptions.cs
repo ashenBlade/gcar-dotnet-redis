@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace GcraRateLimit.Consumer.Options;
+namespace GcraRateLimit.Producer.Options;
 
 public class RedisOptions
 {

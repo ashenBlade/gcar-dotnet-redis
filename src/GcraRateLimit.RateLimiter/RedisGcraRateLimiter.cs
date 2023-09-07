@@ -14,7 +14,8 @@ public class RedisGcraRateLimiter: IRateLimiter
     {
         _multiplexer = multiplexer;
         _options = options;
-        _window = options.CurrentValue.Interval / options.CurrentValue.MaxRequests - TimeSpan.FromMilliseconds(10);
+        // _window = options.CurrentValue.Interval / options.CurrentValue.MaxRequests - TimeSpan.FromMilliseconds(10);
+        _window = options.CurrentValue.Interval / options.CurrentValue.MaxRequests;
         _database = _multiplexer.GetDatabase();
     }
     
