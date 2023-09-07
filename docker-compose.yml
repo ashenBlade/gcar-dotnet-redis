@@ -1,7 +1,43 @@
 ﻿services:
-  web:
-    image: gcar-rate-limit.web
+  producer:
+    image: gcra-rate-limit.producer
     build:
       context: .
-      dockerfile: src/GcarRateLimit.Web/Dockerfile
+      dockerfile: src/GcraRateLimit.Producer/Dockerfile
+    environment:
+      SLEEP_TIME: "00:00:00.010"
+      REQUEST_URL: 'http://consumer/rate-limit?key=shared'
+    deploy:
+      replicas: 5
+      
+  consumer:
+    image: gcra-rate-limit.consumer
+    build:
+      context: .
+      dockerfile: src/GcraRateLimit.Consumer/Dockerfile
+    deploy:
+      replicas: 3
+    environment:
+      REDIS__HOST: 'redis:6379'
+      RATE_LIMIT__Interval: '00:01:00' # 1 минута
+      RATE_LIMIT__MaxRequests: '10000' # 10 тыс. запросов в минуту
+      
+  redis:
+    image: bitnami/redis
+    environment:
+      ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - '6379:6379'
+  
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - '9000:9090'
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+  
+  grafana:
+    image: grafana/grafana
+    ports:
+      - '9090:3000'
     
