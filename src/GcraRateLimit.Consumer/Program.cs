@@ -13,10 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
 {
     var options = sp.GetRequiredService<IOptions<RedisOptions>>().Value;
-    Console.WriteLine($"Подключаюсь к {options.Host}");
-    var multiplexer = ConnectionMultiplexer.Connect(options.Host);
-    Console.WriteLine($"Подключился");
-    return multiplexer;
+    return ConnectionMultiplexer.Connect(options.Host);
 });
 builder.Services
        .AddOptions<RedisOptions>()
@@ -33,7 +30,7 @@ builder.Services
             m.AddMeter(Counters.AppMeter.Name);
         });
 
-builder.Services.AddSingleton<IRateLimiter, RedisGcarRateLimiter>();
+builder.Services.AddSingleton<IRateLimiter, RedisGcraRateLimiter>();
 
 builder.Services
        .AddOptions<RateLimiterOptions>()

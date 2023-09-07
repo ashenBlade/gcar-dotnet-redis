@@ -1,23 +1,23 @@
 # This is a generated file. Not intended for manual editing.
 services:
-  consumer:
+  producer:
     build:
       context: "/home/ash-blade/RiderProjects/gcar-dotnet-redis"
-      dockerfile: "src/GcraRateLimit.Consumer/Dockerfile"
+      dockerfile: "src/GcraRateLimit.Producer/Dockerfile"
       target: "base"
     command: []
     entrypoint:
     - "dotnet"
-    - "/app/bin/Debug/net6.0/GcraRateLimit.Consumer.dll"
+    - "/app/bin/Debug/net6.0/GcraRateLimit.Producer.dll"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
       NUGET_PACKAGES: "/home/ash-blade/.nuget/packages"
       NUGET_FALLBACK_PACKAGES: "/home/ash-blade/.nuget/packages"
-    image: "gcra-rate-limit.consumer:dev"
+    image: "gcra-rate-limit.producer:dev"
     ports: []
     volumes:
     - "/home/ash-blade/.nuget/packages:/root/.nuget/fallbackpackages"
-    - "/home/ash-blade/RiderProjects/gcar-dotnet-redis/src/GcraRateLimit.Consumer:/app:rw"
+    - "/home/ash-blade/RiderProjects/gcar-dotnet-redis/src/GcraRateLimit.Producer:/app:rw"
     - "/home/ash-blade/RiderProjects/gcar-dotnet-redis:/src:rw"
     working_dir: "/app"

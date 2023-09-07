@@ -5,7 +5,7 @@
       context: .
       dockerfile: src/GcraRateLimit.Producer/Dockerfile
     environment:
-      SLEEP_TIME: "00:00:00.010"
+      SLEEP_TIME: "00:00:00.001"
       REQUEST_URL: 'http://consumer/rate-limit?key=shared'
     deploy:
       replicas: 5
